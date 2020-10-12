@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <%- include('../../partials/admin/head') %>
+   </head>
+   <body class="hold-transition skin-blue sidebar-mini">
+      <div class="wrapper">
+         <!-- Header -->
+         <header class="main-header">
+            <%- include('../../partials/admin/header') %>
+         </header>
+         <!-- Sidebar  -->
+         <aside class="main-sidebar">
+            <%- include('../../partials/admin/sidebar') %>
+         </aside>
+         <!-- Content Wrapper  -->
+         <div class="content-wrapper">
+            <section class="content-header">
+               <h1>
+                  Contatos
+               </h1>
+               <ol class="breadcrumb">
+                  <li><a href="/dashboard"><i class="fa fa-home"></i> Início</a></li>
+                  <li class="active">Contatos</li>
+               </ol>
+            </section>
+            <!-- Content -->
+            <section class="content container-fluid">
+               <div class="box">
+                  <div class="box-header">
+                     <h3 class="box-title">Lista</h3>
+                  </div>
+                  <!-- /.box-header -->
+                  <div class="box-body no-padding">
+                     <table class="table table-striped table-hover">
+                        <thead>
+                           <tr>
+                              <th style="width: 10px">#</th>
+                              <th>Nome</th>
+                              <th>E-mail</th>
+                              <th>Mensagem</th>
+                              <th style="min-width: 75px;">Ações</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr>
+                              <td>1.</td>
+                              <td>Hcode</td>
+                              <td>contato@hcode.com.br</td>
+                              <td>Mussum Ipsum, cacilds vidis litro abertis. Manduma pindureta quium dia nois paga. Viva Forevis
+                                 aptent taciti sociosqu ad
+                                 litora torquent. In elementis mé pra quem é amistosis quis leo. Admodum accumsan disputationi eu
+                                 sit. Vide electram sadipscing
+                                 et per.
+                              </td>
+                              <td><button type="button" class="btn btn-xs btn-danger btn-delete"><i class="fa fa-trash"></i> Excluir</button></td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+                  <!-- /.box-body -->
+               </div>
+            </section>
+         </div>
+         <!-- Footer -->
+         <footer class="main-footer">
+            <%- include('../../partials/admin/footer') %>
+         </footer>
+      </div>
+      <!-- Scripts -->
+      <%- include('../../partials/admin/scripts') %>
+   </body>
+</html>

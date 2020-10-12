@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <%- include('../../partials/admin/head') %>
+   </head>
+   <body class="hold-transition skin-blue sidebar-mini">
+      <div class="wrapper">
+         <!-- Header -->
+         <header class="main-header">
+            <%- include('../../partials/admin/header') %>
+         </header>
+         <!-- Sidebar  -->
+         <aside class="main-sidebar">
+            <%- include('../../partials/admin/sidebar') %>
+         </aside>
+         <!-- Content Wrapper  -->
+         <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+               <h1>
+                  Início
+               </h1>
+               <ol class="breadcrumb">
+                  <li><a href="/"><i class="fa fa-home"></i> Dashboard</a></li>
+               </ol>
+            </section>
+            <!-- Main content -->
+            <section class="content container-fluid">
+               <div class="row">
+                  <div class="col-md-3 col-sm-6 col-xs-12">
+                     <div class="info-box" onclick="window.location.href = '/dashboard/reservas'" style="cursor:pointer">
+                        <span class="info-box-icon bg-aqua">
+                        <i class="ion ion-ios-calendar"></i>
+                        </span>
+                        <div class="info-box-content">
+                           <span class="info-box-text">Reservas</span>
+                           <span class="info-box-number"><%= countReservations %></span>
+                        </div>
+                        <!-- /.info-box-content -->
+                     </div>
+                     <!-- /.info-box -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-md-3 col-sm-6 col-xs-12">
+                     <div class="info-box" onclick="window.location.href = '/dashboard/contatos'" style="cursor:pointer">
+                        <span class="info-box-icon bg-red">
+                        <i class="ion ion-ios-chatboxes"></i>
+                        </span>
+                        <div class="info-box-content">
+                           <span class="info-box-text">Contatos</span>
+                           <span class="info-box-number">41</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                     </div>
+                     <!-- /.info-box -->
+                  </div>
+                  <!-- /.col -->
+                  <!-- fix for small devices only -->
+                  <div class="clearfix visible-sm-block"></div>
+                  <div class="col-md-3 col-sm-6 col-xs-12">
+                     <div class="info-box" onclick="window.location.href = '/dashboard/menu'" style="cursor:pointer">
+                        <span class="info-box-icon bg-green">
+                        <i class="fa fa-cutlery"></i>
+                        </span>
+                        <div class="info-box-content">
+                           <span class="info-box-text">Menu</span>
+                           <span class="info-box-number">3</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                     </div>
+                     <!-- /.info-box -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-md-3 col-sm-6 col-xs-12">
+                     <div class="info-box" onclick="window.location.href = '/dashboard/usuarios'" style="cursor:pointer">
+                        <span class="info-box-icon bg-yellow">
+                        <i class="ion ion-ios-people-outline"></i>
+                        </span>
+                        <div class="info-box-content">
+                           <span class="info-box-text">Usuários</span>
+                           <span class="info-box-number"><%= countUsers %></span>
+                        </div>
+                        <!-- /.info-box-content -->
+                     </div>
+                     <!-- /.info-box -->
+                  </div>
+                  <!-- /.col -->
+               </div>
+            </section>
+            <!-- /.content -->
+         </div>
+         <!-- Footer -->
+         <footer class="main-footer">
+            <%- include('../../partials/admin/footer') %>
+         </footer>
+      </div>
+      <!-- Scripts -->
+      <%- include('../../partials/admin/scripts') %>
+      <!-- Page scripts -->
+      <script type="text/javascript">
+         // To make Pace works on Ajax calls
+         $(document).ajaxStart(function () {
+           Pace.restart()
+         })
+         $('.ajax').click(function () {
+           $.ajax({
+             url: '#', success: function (result) {
+               $('.ajax-content').html('<hr>Ajax Request Completed !')
+             }
+           })
+         })
+      </script>
+   </body>
+</html>

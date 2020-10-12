@@ -7,11 +7,13 @@ class DashboardController {
     try {
       const dataReservations = await knex('reservations').count('id');
       const dataUsers = await knex('users').count('id');
+      const dataContacts = await knex('contacts').count('id');
 
 
       response.render('pages/admin/index', {
         countReservations: dataReservations[0]['count(`id`)'],
-        countUsers: dataUsers[0]['count(`id`)']
+        countUsers: dataUsers[0]['count(`id`)'],
+        countContacts: dataContacts[0]['count(`id`)']
       });
 
     } catch (error) {

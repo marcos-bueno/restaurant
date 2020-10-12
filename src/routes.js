@@ -10,6 +10,8 @@ import DashboardController from './controllers/DashboardController';
 
 import ReservationController from './controllers/ReservationController';
 
+import ContactsController from './controllers/ContactsController';
+
 routes.get('/', IndexController.index);
 
 routes.post('/', IndexController.create);
@@ -32,16 +34,17 @@ routes.put('/dashboard/usuarios/:id', UserController.update);
 
 routes.delete('/dashboard/usuarios/:id', UserController.delete);
 
+routes.get('/contato', ContactsController.index);
+
+routes.post('/contato', ContactsController.create);
+
+
 routes.get('/menu', (request, response) => {
   return response.render('pages/menu');
 });
 
 routes.get('/servicos', (request, response) => {
   return response.render('pages/services');
-});
-
-routes.get('/contato', (request, response) => {
-  return response.render('pages/contact');
 });
 
 routes.get('/faca-sua-reserva', (request, response) => {

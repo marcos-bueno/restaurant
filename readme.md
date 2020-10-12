@@ -14,8 +14,8 @@
 Open your favorite Terminal and run these commands:
 
 ```sh
-$ git clone git@github.com:marcos-bueno/pa4-restaurante.git
-$ cd pa4-restaurante
+$ git clone git@github.com:BrunoGurris/restaurante.git
+$ cd restaurante
 $ yarn
 $ yarn knex migrate:latest
 $ code .

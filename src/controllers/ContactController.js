@@ -1,6 +1,6 @@
 import knex from '../database';
 
-class ContactsController {
+class ContactController {
   index(request, response, next) {
     
     try {
@@ -36,4 +36,4 @@ class ContactsController {
   }
 }
 
-export default new ContactsController;
+export default new ContactController;

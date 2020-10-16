@@ -1,12 +1,6 @@
 # PA4 - Restaurante
 
-# New Features!
-  - Theme organized with includes;
-  - Created class IndexController;
-  - Created class DashboardController;
-  - Created class ReservationController.
-
-## Installation:
+# Installation:
   - Install [Yarn](https://classic.yarnpkg.com/en/docs/install) (stable version);
   - Install [Node.js](https://nodejs.org/) (recommended version for most users).
   - Install [Docker](https://www.docker.com/products/docker-desktop) and [pull image](https://hub.docker.com/_/mysql)

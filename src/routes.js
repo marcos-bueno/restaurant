@@ -10,7 +10,9 @@ import DashboardController from './controllers/DashboardController';
 
 import ReservationController from './controllers/ReservationController';
 
-import ContactsController from './controllers/ContactsController';
+import ContactController from './controllers/ContactController';
+
+import DashContactsController from './controllers/DashContactsController';
 
 routes.get('/', IndexController.index);
 
@@ -34,10 +36,13 @@ routes.put('/dashboard/usuarios/:id', UserController.update);
 
 routes.delete('/dashboard/usuarios/:id', UserController.delete);
 
-routes.get('/contato', ContactsController.index);
+routes.get('/contato', ContactController.index);
 
-routes.post('/contato', ContactsController.create);
+routes.post('/contato', ContactController.create);
 
+routes.get('/dashboard/contatos', DashContactsController.index);
+
+routes.delete('/dashboard/contatos/:id', DashContactsController.delete);
 
 routes.get('/menu', (request, response) => {
   return response.render('pages/menu');
@@ -58,14 +63,6 @@ routes.get('/login', (request, response) => {
 routes.get('/dashboard/menu', (request, response) => {
   return response.render('pages/admin/menus');
 });
-
-routes.get('/dashboard/contatos', (request, response) => {
-  return response.render('pages/admin/contacts');
-});
-
-// routes.get('/dashboard/usuarios', (request, response) => {
-//   return response.render('pages/admin/users');
-// });
 
 routes.get('/dashboard/emails', (request, response) => {
   return response.render('pages/admin/emails');

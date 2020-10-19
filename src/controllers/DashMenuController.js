@@ -24,8 +24,9 @@ class DashMenuController {
         title, 
         description, 
         price,
-        photo
       } = request.body;
+
+      const{photo} = request.file.filename;
   
       await knex('menus').insert({
         title, 

@@ -2,6 +2,10 @@ import { Router } from 'express';
 
 const routes = new Router();
 
+import multer from 'multer';
+
+var upload = multer({ dest: 'uploads/' });
+
 import IndexController from './controllers/IndexController';
 
 import UserController from './controllers/UserController';
@@ -48,7 +52,7 @@ routes.delete('/dashboard/contatos/:id', DashContactsController.delete);
 
 routes.get('/dashboard/menu', DashMenuController.index);
 
-routes.post('/dashboard/menu', DashMenuController.create);
+routes.post('/dashboard/menu', upload.single('photo'), DashMenuController.create);
 
 routes.delete('/dashboard/menu/:id', DashMenuController.delete);
 

@@ -1,6 +1,10 @@
 # PA4 - Restaurante
 
-# Installation:
+# Schedule
+
+[https://www.notion.so/5a3cd88cb3ed498ba79f6fefa1002e84?v=e746929c977b4eefa4cd95724687b1c3](https://www.notion.so/5a3cd88cb3ed498ba79f6fefa1002e84?v=e746929c977b4eefa4cd95724687b1c3)
+
+## Installation:
   - Install [Yarn](https://classic.yarnpkg.com/en/docs/install) (stable version);
   - Install [Node.js](https://nodejs.org/) (recommended version for most users).
   - Install [Docker](https://www.docker.com/products/docker-desktop) and [pull image](https://hub.docker.com/_/mysql)

@@ -14,6 +14,8 @@ import ContactController from './controllers/ContactController';
 
 import DashContactsController from './controllers/DashContactsController';
 
+import DashMenuController from './controllers/DashMenuController';
+
 routes.get('/', IndexController.index);
 
 routes.post('/', IndexController.create);
@@ -44,6 +46,12 @@ routes.get('/dashboard/contatos', DashContactsController.index);
 
 routes.delete('/dashboard/contatos/:id', DashContactsController.delete);
 
+routes.get('/dashboard/menu', DashMenuController.index);
+
+routes.post('/dashboard/menu', DashMenuController.create);
+
+routes.delete('/dashboard/menu/:id', DashMenuController.delete);
+
 routes.get('/menu', (request, response) => {
   return response.render('pages/menu');
 });
@@ -58,10 +66,6 @@ routes.get('/faca-sua-reserva', (request, response) => {
 
 routes.get('/login', (request, response) => {
   return response.render('pages/login');
-});
-
-routes.get('/dashboard/menu', (request, response) => {
-  return response.render('pages/admin/menus');
 });
 
 routes.get('/dashboard/emails', (request, response) => {

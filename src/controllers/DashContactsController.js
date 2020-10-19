@@ -25,6 +25,7 @@ class DashContactsController {
       await knex('contacts')
       .where({ id })
       .del();
+      response.redirect("/");
 
     } catch (error) {
       

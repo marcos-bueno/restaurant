@@ -1,10 +1,12 @@
 import { Router } from 'express';
 
-const routes = new Router();
-
 import multer from 'multer';
 
-var upload = multer({ dest: 'uploads/' });
+import uploadConfig from './config/multer';
+
+const routes = new Router();
+
+const upload = multer(uploadConfig);
 
 import IndexController from './controllers/IndexController';
 

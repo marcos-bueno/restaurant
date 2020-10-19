@@ -23,10 +23,10 @@ class DashMenuController {
       const { 
         title, 
         description, 
-        price,
+        price
       } = request.body;
 
-      const{photo} = request.file.filename;
+      const { filename: photo } = request.file;
   
       await knex('menus').insert({
         title, 
@@ -35,7 +35,7 @@ class DashMenuController {
         photo
       });
   
-      return response.redirect('/');
+      return response.redirect('/dashboard/menu');
 
     } catch (error) {
       

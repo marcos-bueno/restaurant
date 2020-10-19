@@ -169,37 +169,6 @@
       <%- include('../../partials/admin/scripts') %>
       <!-- Page scripts -->
       <script type="text/javascript">
-         
-         /* Create */
-         
-         const formCreate = document.querySelector("#modal-create form");
-
-         const createBtn = document.querySelector("#createBtn");
-
-         createBtn.addEventListener('click', async event => {
-
-            const formCreateData = new FormData(formCreate);
-
-            const object = {};
-
-            formCreateData.forEach((value, key) => {
-               object[key] = value
-            });
-
-            if(request.body.id === undefined) {
-               await fetch(`/dashboard/usuarios`, {
-                  method: 'POST',
-                  headers: { 
-                     'Content-Type': 'application/json' 
-                  },
-                  body: JSON.stringify({
-                     name: object.name,
-                     email: object.email,
-                     password: object.password
-                  }),
-               });
-            }
-         });
 
          /* Update name and email */
          

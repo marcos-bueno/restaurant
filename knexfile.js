@@ -1,11 +1,11 @@
 module.exports = {
   development: {
-    client: 'mysql',
+    client: process.env.DB_CLIENT,
     connection: {
-      host : 'localhost',
-      user : 'root',
-      password : 'rc@ZXQc5',
-      database : 'restaurante'
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASS,
+      database: process.env.DB_NAME
     },
     migrations: {
       tableName: 'knex_migrations',

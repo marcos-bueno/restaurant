@@ -40,20 +40,20 @@
                            <tr>
                               <th style="width: 10px">#</th>
                               <th>Foto</th>
-                              <th>Título</th>
+                              <th style="min-width: 90px;">Título</th>
                               <th>Descrição</th>
-                              <th>Preço</th>
-                              <th style="min-width: 134px;">Ações</th>
+                              <th style="min-width: 90px;">Preço</th>
+                              <th style="min-width: 150px;">Ações</th>
                            </tr>
                         </thead>
                         <tbody>
                            <% data.forEach(row => { %>
                            <tr data-row="<%= JSON.stringify(row) %>">
                               <td><%= row.id %></td>
-                              <td><img src="dist/img/boxed-bg.jpg" alt="" style="height: 18px;"></td>
+                              <td><img src="<%= `/../${row.photo}` %>" alt="" style="height: 50px;"></td>
                               <td><%= row.title %></td>
                               <td><%= row.description %></td>
-                              <td><%= row.price %></td>
+                              <td><%= `R$ ${row.price.toFixed(2)}` %></td>
                               <td><button type="button" class="btn btn-xs btn-info btn-update" data-toggle="modal" data-target="#modal-update"><i
                                  class="fa fa-pencil"></i> Editar</button>&nbsp;<button type="button" class="btn btn-xs btn-danger btn-delete"><i
                                  class="fa fa-trash"></i> Excluir</button></td>
@@ -89,12 +89,12 @@
                         </div>
                         <div class="form-group">
                            <label for="inputPriceCreate">Preço</label>
-                           <input type="number" class="form-control" id="inputPriceCreate" name="price">
+                           <input type="number" min="1" step="any" class="form-control" id="inputPriceCreate" name="price">
                         </div>
                         <div class="form-group">
-                           <label for="inputPhotoCreate">Foto</label>
-                           <img style="max-width: 128px; max-height: 128px; display: block;" src="dist/img/boxed-bg.jpg">
-                           <input type="file" class="form-control" id="inputPhotoCreate" name="photo">
+                           <label for="imputPhotoCreate">Foto</label>
+                           <img style="max-width: 128px; max-height: 128px; display: block;" src="../admin/dist/img/no-image.png">
+                           <input type="file" class="form-control" id="photo" name="photo">
                         </div>
                      </div>
                      <div class="modal-footer">
@@ -156,30 +156,41 @@
       <%- include('../../partials/admin/scripts') %>
       <!-- Page scripts -->
       <script type="text/javascript">
-      /* Delete */
 
-      [...document.querySelectorAll('.btn-delete')].forEach(btn => {
+         /* Input change */
 
-      btn.addEventListener('click', async event => {
+         const photoInput = document.getElementById('photo');
+         const img = document.querySelector('.form-group img');
 
-         event.preventDefault();
+         photoInput.onchange = function(e) {
+            img.classList.add('preview');
+            img.src = URL.createObjectURL(e.target.files[0]);
+         };
+      
+         /* Delete */
 
-         let tr = event.path.find(element => {
+         [...document.querySelectorAll('.btn-delete')].forEach(btn => {
 
-            return (element.tagName.toUpperCase() === 'TR');
-         });
+            btn.addEventListener('click', async event => {
 
-         let data = JSON.parse(tr.dataset.row);
+               event.preventDefault();
 
-         if (confirm(`Deseja realmente excluir o item ${data.title}?`)) {
+               let tr = event.path.find(element => {
 
-            await fetch(`/dashboard/menu/${data.id}`, {
-               method: 'DELETE'
+                  return (element.tagName.toUpperCase() === 'TR');
+               });
+
+               let data = JSON.parse(tr.dataset.row);
+
+               if (confirm(`Deseja realmente excluir o item ${data.title}?`)) {
+
+                  await fetch(`/dashboard/menu/${data.id}`, {
+                     method: 'DELETE'
+                  });
+               }
+               window.location.reload();
             });
-         }
-         window.location.reload();
-      });
-      });
+         });
       </script>
    </body>
 </html>

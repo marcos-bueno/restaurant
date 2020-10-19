@@ -1,4 +1,6 @@
 .DS_Store
 thumbs.db
 *.log
+.env
 node_modules/
+uploads/

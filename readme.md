@@ -25,6 +25,7 @@ $ yarn dev
 | knex | [https://github.com/knex/knex][PlKnex] |
 | mysql | [https://github.com/mysqljs/mysql][PlMysql] |
 | bcryptjs | [https://github.com/dcodeIO/bcrypt.js][PlBcryptjs] |
+| multer | [https://github.com/expressjs/multer][PlMulter] |
 | moment | [https://github.com/moment/moment][PlMoment] |
 | nodemon | [https://github.com/remy/nodemon][PlNodemon] |
 | sucrase | [https://github.com/alangpierce/sucrase][PlSucrase] |
@@ -34,6 +35,7 @@ $ yarn dev
    [PlKnex]: <https://github.com/knex/knex>
    [PlMysql]: <https://github.com/mysqljs/mysql>
    [PlBcryptjs]: <https://github.com/dcodeIO/bcrypt.js>
+   [PlMulter]: <https://github.com/expressjs/multer>
    [PlMoment]: <https://github.com/moment/moment>
    [PlNodemon]: <https://github.com/remy/nodemon>
    [PlSucrase]: <https://github.com/alangpierce/sucrase>

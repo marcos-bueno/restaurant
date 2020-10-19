@@ -1,3 +1,4 @@
+require('dotenv').config();
 import express from 'express';
 import routes from './routes';
 import path from 'path';
@@ -26,6 +27,7 @@ class App {
     this.server.set('views', path.join(__dirname, 'views'));
     this.server.set('view engine', 'ejs');
     this.server.use(express.static(path.join(__dirname, '..', 'public')));
+    this.server.use(express.static(path.join(__dirname, '..', 'uploads')));
   }
 
   routes() {

@@ -24,57 +24,25 @@
                   </div>
                </div>
                <div class="row">
-                  <div class="col-lg-4 col-md-4 col-sm-6">
-                     <a href="images/img_1.jpg" class="fh5co-card-item image-popup">
-                        <figure>
-                           <div class="overlay">
-                              <i class="ti-plus"></i>
+                  <% data.slice(0, 3).forEach(row => { %>
+                     <div class="col-lg-4 col-md-4 col-sm-6">
+                        <a href="<%= `/../${row.photo}` %>" class="fh5co-card-item image-popup">
+                           <figure>
+                              <div class="overlay">
+                                 <i class="ti-plus"></i>
+                              </div>
+                              <img src="<%= `/../${row.photo}` %>" alt="<%= row.title %>" class="img-responsive">
+                           </figure>
+                           <div class="fh5co-text">
+                              <h2><%= row.title %></h2>
+                              <p><%= row.description %></p>
+                              <p>
+                                 <span class="price cursive-font"><%= `R$ ${row.price.toFixed(2)}` %></span>
+                              </p>
                            </div>
-                           <img src="images/img_1.jpg" alt="Image" class="img-responsive">
-                        </figure>
-                        <div class="fh5co-text">
-                           <h2>Bife de Costela com molho</h2>
-                           <p>Vide electram sadipscing et per. Aenean aliquam molestie leo, vitae iaculis nisl.</p>
-                           <p>
-                              <span class="price cursive-font">R$35,69</span>
-                           </p>
-                        </div>
-                     </a>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-6">
-                     <a href="images/img_3.jpg" class="fh5co-card-item image-popup">
-                        <figure>
-                           <div class="overlay">
-                              <i class="ti-plus"></i>
-                           </div>
-                           <img src="images/img_2.jpg" alt="Image" class="img-responsive">
-                        </figure>
-                        <div class="fh5co-text">
-                           <h2>Hambúrguer com Fritas</h2>
-                           <p>Vide electram sadipscing et per. Aenean aliquam molestie leo, vitae iaculis nisl.</p>
-                           <p>
-                              <span class="price cursive-font">R$22,80</span>
-                           </p>
-                        </div>
-                     </a>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-6">
-                     <a href="images/img_5.jpg" class="fh5co-card-item image-popup">
-                        <figure>
-                           <div class="overlay">
-                              <i class="ti-plus"></i>
-                           </div>
-                           <img src="images/img_5.jpg" alt="Image" class="img-responsive">
-                        </figure>
-                        <div class="fh5co-text">
-                           <h2>Chilli com Carne</h2>
-                           <p>Vide electram sadipscing et per. Aenean aliquam molestie leo, vitae iaculis nisl.</p>
-                           <p>
-                              <span class="price cursive-font">R$29,40</span>
-                           </p>
-                        </div>
-                     </a>
-                  </div>
+                        </a>
+                     </div>
+                  <% }); %>
                </div>
             </div>
          </div>

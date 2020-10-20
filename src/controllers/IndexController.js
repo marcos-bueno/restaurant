@@ -1,10 +1,15 @@
 import knex from '../database';
 
 class IndexController {
-  index(request, response, next) {
+  async index(request, response, next) {
     
     try {
-      response.render('pages/index');
+      const data = await knex('menus');
+
+      response.render('pages/index', {
+        data,
+        body: request.body
+      });
 
     } catch (error) {
       

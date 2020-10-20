@@ -47,7 +47,7 @@ class ReservationController {
         });
       }
 
-      response.redirect('/dashboard/reservas');
+      return response.redirect('/dashboard/reservas');
 
     } catch (error) {
 
@@ -70,6 +70,8 @@ class ReservationController {
       await knex('reservations')
       .where({ id })
       .update({ name, email, people, date, time });
+
+      return response.redirect('/dashboard/reservas');
 
     } catch (error) {
       

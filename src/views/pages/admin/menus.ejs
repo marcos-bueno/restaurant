@@ -50,7 +50,7 @@
                            <% data.forEach(row => { %>
                            <tr data-row="<%= JSON.stringify(row) %>">
                               <td><%= row.id %></td>
-                              <td><img src="<%= `/../${row.photo}` %>" alt="<%= row.title %>" style="height: 50px;"></td>
+                              <td><img src="<%= `/../${row.photo}` %>" alt="<%= row.title %>" style="height: 50px;width: 75px;"></td>
                               <td><%= row.title %></td>
                               <td><%= row.description %></td>
                               <td><%= `R$ ${row.price.toFixed(2)}` %></td>
@@ -94,12 +94,12 @@
                         <div class="form-group">
                            <label for="imputPhotoCreate">Foto</label>
                            <img style="max-width: 128px; max-height: 128px; display: block;" src="../admin/dist/img/no-image.png">
-                           <input type="file" class="form-control" id="photo" name="photo">
+                           <input type="file" class="form-control" id="inputPhotoCreate" name="photo">
                         </div>
                      </div>
                      <div class="modal-footer">
                         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-success">Salvar</button>
+                        <button type="submit" class="btn btn-success">Cadastrar</button>
                      </div>
                   </form>
                </div>
@@ -110,7 +110,7 @@
          <div class="modal fade" id="modal-update">
             <div class="modal-dialog">
                <div class="modal-content" style="border-top: 3px solid #00c0ef;">
-                  <form method="post">
+                  <form method="post" enctype="multipart/form-data">
                      <input type="hidden" name="id">
                      <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -133,7 +133,7 @@
                         </div>
                         <div class="form-group">
                            <label for="inputPhotoUpdate">Foto</label>
-                           <img style="max-width: 128px; max-height: 128px; display: block;" src="dist/img/boxed-bg.jpg">
+                           <img style="max-width: 128px; max-height: 128px; display: block;" src="../admin/dist/img/no-image.png">
                            <input type="file" class="form-control" id="inputPhotoUpdate" name="photo">
                         </div>
                      </div>
@@ -159,12 +159,19 @@
 
          /* Input change */
 
-         const photoInput = document.getElementById('photo');
-         const img = document.querySelector('.form-group img');
+         const photoInput = document.getElementById('inputPhotoCreate');
+         const img = document.querySelector('#modal-create .form-group img');
+         const photoInputUpdate = document.getElementById('inputPhotoUpdate');
+         const imgUpdate = document.querySelector('#modal-update .form-group img');
 
-         photoInput.onchange = function(e) {
+         photoInput.onchange = function(event) {
             img.classList.add('preview');
-            img.src = URL.createObjectURL(e.target.files[0]);
+            img.src = URL.createObjectURL(event.target.files[0]);
+         };
+
+         photoInputUpdate.onchange = function(e) {
+            imgUpdate.classList.add('preview');
+            imgUpdate.src = URL.createObjectURL(e.target.files[0]);
          };
 
          /* Update */
@@ -193,6 +200,10 @@
                      case 'photo':
                         formUpdate.querySelector('img').src = '/' + data[name];
                         break;
+
+                     case 'price':
+                        formUpdate.querySelector('#inputPriceUpdate').value = data[name].toFixed(2);
+                        break;
                
                      default:
                         if (input) input.value = data[name];
@@ -214,6 +225,8 @@
                object[key] = value
             });
 
+            console.log('OBJECT: ', object.photo);
+
             await fetch(`/dashboard/menu/${object.id}`, {
                method: 'PUT',
                headers: { 
@@ -221,10 +234,10 @@
                },
                body: JSON.stringify({
                   id: object.id,
+                  photo: object.photo,
                   title: object.title,
                   description: object.description,
-                  price: object.price,
-                  photo: object.photo,
+                  price: object.price
                }),
             });
          });
@@ -250,7 +263,7 @@
                      method: 'DELETE'
                   });
                }
-               window.location.reload();
+               // window.location.reload();
             });
          });
       </script>

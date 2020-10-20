@@ -91,6 +91,8 @@ class UserController {
       .where({ id })
       .del();
 
+      return response.redirect('/dashboard/usuarios');
+
     } catch (error) {
       
       next(error);

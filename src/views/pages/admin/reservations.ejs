@@ -203,7 +203,7 @@
       <%- include('../../partials/admin/scripts') %>
       <!-- Page scripts -->
       <script src="../../js/moment.min.js"></script>
-      <script type="text/javascript">
+      <script>
          
          /* Update */
          
@@ -213,7 +213,9 @@
          
            btn.addEventListener('click', async event => {
          
-             let tr = event.path.find(element => {
+            var path = event.path || (event.composedPath && event.composedPath());
+         
+            let tr = path.find(element => {
          
                return (element.tagName.toUpperCase() === 'TR');
              });
@@ -276,7 +278,9 @@
 
                event.preventDefault();
 
-               let tr = event.path.find(element => {
+               var path = event.path || (event.composedPath && event.composedPath());
+         
+               let tr = path.find(element => {
 
                   return (element.tagName.toUpperCase() === 'TR');
                });

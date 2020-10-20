@@ -67,11 +67,16 @@
       <!-- Scripts -->
       <%- include('../../partials/admin/scripts') %>
       <script>
+
+         /* Delete */
+
          [...document.querySelectorAll('.btn-delete')].forEach(btn => {
 
             btn.addEventListener('click', async event => {
 
-               let tr = event.path.find(element => {
+               var path = event.path || (event.composedPath && event.composedPath());
+         
+               let tr = path.find(element => {
 
                   return (element.tagName.toUpperCase() === 'TR');
                });

@@ -50,11 +50,11 @@
                            <% data.forEach(row => { %>
                            <tr data-row="<%= JSON.stringify(row) %>">
                               <td><%= row.id %></td>
-                              <td><img src="<%= `/../${row.photo}` %>" alt="" style="height: 50px;"></td>
+                              <td><img src="<%= `/../${row.photo}` %>" alt="<%= row.title %>" style="height: 50px;"></td>
                               <td><%= row.title %></td>
                               <td><%= row.description %></td>
                               <td><%= `R$ ${row.price.toFixed(2)}` %></td>
-                              <td><button type="button" class="btn btn-xs btn-info btn-update" data-toggle="modal" data-target="#modal-update"><i
+                              <td><button type="button" class="btn btn-xs btn-info btn-update"><i
                                  class="fa fa-pencil"></i> Editar</button>&nbsp;<button type="button" class="btn btn-xs btn-danger btn-delete"><i
                                  class="fa fa-trash"></i> Excluir</button></td>
                            </tr>
@@ -129,7 +129,7 @@
                         </div>
                         <div class="form-group">
                            <label for="inputPriceUpdate">Preço</label>
-                           <input type="number" class="form-control" id="inputPriceUpdate" name="price">
+                           <input type="number" min="1" step="any" class="form-control" id="inputPriceUpdate" name="price">
                         </div>
                         <div class="form-group">
                            <label for="inputPhotoUpdate">Foto</label>
@@ -139,7 +139,7 @@
                      </div>
                      <div class="modal-footer">
                         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-info">Salvar</button>
+                        <button type="submit" id="updateBtn" class="btn btn-info">Atualizar</button>
                      </div>
                   </form>
                </div>
@@ -155,7 +155,7 @@
       <!-- Scripts -->
       <%- include('../../partials/admin/scripts') %>
       <!-- Page scripts -->
-      <script type="text/javascript">
+      <script>
 
          /* Input change */
 
@@ -166,6 +166,68 @@
             img.classList.add('preview');
             img.src = URL.createObjectURL(e.target.files[0]);
          };
+
+         /* Update */
+
+         const formUpdate = document.querySelector("#modal-update form");
+
+         [...document.querySelectorAll('.btn-update')].forEach(btn => {
+
+            btn.addEventListener('click', async event => {
+
+               var path = event.path || (event.composedPath && event.composedPath());
+         
+               let tr = path.find(element => {
+
+                  return (element.tagName.toUpperCase() === 'TR');
+               });
+
+               let data = JSON.parse(tr.dataset.row);
+
+               for (let name in data) {
+
+                  let input = formUpdate.querySelector(`[name=${name}]`);
+
+                  switch (name) {
+
+                     case 'photo':
+                        formUpdate.querySelector('img').src = '/' + data[name];
+                        break;
+               
+                     default:
+                        if (input) input.value = data[name];
+                  }
+               }
+               $('#modal-update').modal('show');
+            });
+         });
+
+         const updateBtn = document.querySelector("#updateBtn");
+
+         updateBtn.addEventListener('click', async event => {
+
+            const formData = new FormData(formUpdate);
+
+            const object = {};
+
+            formData.forEach((value, key) => {
+               object[key] = value
+            });
+
+            await fetch(`/dashboard/menu/${object.id}`, {
+               method: 'PUT',
+               headers: { 
+                  'Content-Type': 'application/json' 
+               },
+               body: JSON.stringify({
+                  id: object.id,
+                  title: object.title,
+                  description: object.description,
+                  price: object.price,
+                  photo: object.photo,
+               }),
+            });
+         });
       
          /* Delete */
 

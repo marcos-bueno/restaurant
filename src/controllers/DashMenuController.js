@@ -33,13 +33,13 @@ class DashMenuController {
     
         await knex('menus').insert({
           photo,
-          title, 
+          title,
           description, 
           price
         });
       }
 
-      return response.redirect('/dashboard/menu');
+      // return response.redirect('/dashboard/menu');
 
     } catch (error) {
       
@@ -51,23 +51,43 @@ class DashMenuController {
   async update(request, response, next) {
 
     try {
-      const { 
-        id,
-        photo,
-        title,
-        description,
-        price
-      } = request.body;
 
-      console.log('CONSOLE: ', request.body);
+      if (request.body.newPhoto === '') { 
 
-      // const { filename: photo } = request.file;
+        console.log('IF');
 
-      await knex('menus')
-      .where({ id })
-      .update({ photo, title, description, price });
+        const { 
+          id,
+          title,
+          description,
+          price
+        } = request.body;
 
-      return response.redirect('/dashboard/menu');
+        const { photo } = request.file
+
+        await knex('menus')
+        .where({ id })
+        .update({ photo, title, description, price });
+        
+      } else {
+
+        console.log('ELSE');
+
+        // const { 
+        //   id,
+        //   title,
+        //   description,
+        //   price
+        // } = request.body;
+
+        // const { filename: photo } = request.file;
+
+        // await knex('menus')
+        // .where({ id })
+        // .update({ photo, title, description, price });
+      }
+
+      // return response.redirect('/dashboard/menu');
 
     } catch (error) {
       

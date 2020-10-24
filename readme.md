@@ -15,8 +15,20 @@ Open your favorite Terminal and run these commands:
 $ git clone git@github.com:BrunoGurris/restaurante.git
 $ cd restaurante
 $ yarn
-$ yarn knex migrate:latest
 $ code .
+```
+
+Create the .env file at the root of the project and include the environment variables:
+
+PORT=???
+DB_CLIENT=???
+DB_HOST=???
+DB_USER=???
+DB_PASS=???
+DB_NAME=???
+
+```sh
+$ yarn knex migrate:latest
 $ yarn dev
 ```
 

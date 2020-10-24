@@ -20,12 +20,14 @@ $ code .
 
 Create the .env file at the root of the project and include the environment variables:
 
+```sh
 PORT=???
 DB_CLIENT=???
 DB_HOST=???
 DB_USER=???
 DB_PASS=???
 DB_NAME=???
+```
 
 ```sh
 $ yarn knex migrate:latest

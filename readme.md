@@ -45,6 +45,7 @@ $ yarn dev
 | bcryptjs | [https://github.com/dcodeIO/bcrypt.js][PlBcryptjs] |
 | multer | [https://github.com/expressjs/multer][PlMulter] |
 | moment | [https://github.com/moment/moment][PlMoment] |
+| dotenv | [https://github.com/motdotla/dotenv][PlDotenv] |
 | nodemon | [https://github.com/remy/nodemon][PlNodemon] |
 | sucrase | [https://github.com/alangpierce/sucrase][PlSucrase] |
 
@@ -55,6 +56,7 @@ $ yarn dev
    [PlBcryptjs]: <https://github.com/dcodeIO/bcrypt.js>
    [PlMulter]: <https://github.com/expressjs/multer>
    [PlMoment]: <https://github.com/moment/moment>
+   [PlDotenv]: <https://github.com/motdotla/dotenv>
    [PlNodemon]: <https://github.com/remy/nodemon>
    [PlSucrase]: <https://github.com/alangpierce/sucrase>
 

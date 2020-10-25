@@ -21,12 +21,12 @@ $ code .
 Create the .env file at the root of the project and include the environment variables:
 
 ```sh
-PORT=???
-DB_CLIENT=???
-DB_HOST=???
-DB_USER=???
-DB_PASS=???
-DB_NAME=???
+PORT=??? // 3333, 8080...
+DB_CLIENT=??? // mysql, postgres...
+DB_HOST=??? // 127.0.0.1, localhost...
+DB_USER=??? // name of the user that is connected to the database.
+DB_PASS=??? // password of the user that is connected to the database.
+DB_NAME=??? // name of the database.
 ```
 
 ```sh

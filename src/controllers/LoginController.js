@@ -13,25 +13,31 @@ class LoginController {
     }
 
     async store(request, response, next){
-        const{
-            email,
-            password
-        } = request.body;
 
-        const user = await knex('users')
-        .where({ email });
+        const { email, password } = request.body;
 
-        if(!user)
-        {
-            console.log("Deu ruim");
+        const user = await knex('users').where({ email });
+
+        const data = JSON.stringify(user);
+
+        console.log('>> data: ', data);
+
+        const json = JSON.parse(data);
+
+        console.log('>> json: ', json);
+
+        if (!user) {
+            console.log("Usuário não encontrado!");
             return response.redirect('/login');
         }
-        else
-        {
-            console.log(user);
-        }
         
-        //if(!await bcrypt.compare(password, ))
+        if(!await bcrypt.compare(password, json[0].password)) {
+            console.log("Senha incorreta!");
+            return response.redirect('/login');
+        }
+
+        return response.redirect('/dashboard');
+
     }
 }
 

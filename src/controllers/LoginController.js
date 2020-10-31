@@ -19,25 +19,21 @@ class LoginController {
         const user = await knex('users').where({ email });
 
         const data = JSON.stringify(user);
-
-        console.log('>> data: ', data);
-
         const json = JSON.parse(data);
 
-        console.log('>> json: ', json);
+        // if (!user) {
 
-        if (!user) {
+        if (user.length === 0) {
             console.log("Usuário não encontrado!");
             return response.redirect('/login');
-        }
+        } 
         
-        if(!await bcrypt.compare(password, json[0].password)) {
+        if (!await bcrypt.compare(password, json[0].password)) {
             console.log("Senha incorreta!");
             return response.redirect('/login');
-        }
+        } 
 
-        return response.redirect('/dashboard');
-
+        return response.redirect('/dashboard'); 
     }
 }
 

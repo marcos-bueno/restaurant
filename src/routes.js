@@ -22,6 +22,8 @@ import DashContactsController from './controllers/DashContactsController';
 
 import DashMenuController from './controllers/DashMenuController';
 
+import LoginController from './controllers/LoginController';
+
 routes.get('/', IndexController.index);
 
 routes.post('/', IndexController.create);
@@ -60,8 +62,8 @@ routes.put('/dashboard/menu/:id', upload.single('photo'), DashMenuController.upd
 
 routes.delete('/dashboard/menu/:id', DashMenuController.delete);
 
-routes.get('/login', (request, response) => {
-  return response.render('pages/login');
-});
+routes.get('/login', LoginController.index);
+
+routes.post('/login', LoginController.store);
 
 export default routes;

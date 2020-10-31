@@ -21,8 +21,6 @@ class LoginController {
         const data = JSON.stringify(user);
         const json = JSON.parse(data);
 
-        // if (!user) {
-
         if (user.length === 0) {
             console.log("Usuário não encontrado!");
             return response.redirect('/login');

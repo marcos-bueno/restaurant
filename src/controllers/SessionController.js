@@ -1,7 +1,7 @@
 import knex from '../database';
 import bcrypt from 'bcryptjs';
 
-class LoginController {
+class SessionController {
     index(request, response, next) {
         try {
           response.render('pages/login');
@@ -22,17 +22,26 @@ class LoginController {
         const json = JSON.parse(data);
 
         if (user.length === 0) {
-            console.log("Usuário não encontrado!");
+            request.flash('error', 'Usuário não encontrado!');
             return response.redirect('/login');
         } 
         
         if (!await bcrypt.compare(password, json[0].password)) {
-            console.log("Senha incorreta!");
+            request.flash('error', 'Senha incorreta!');
             return response.redirect('/login');
         } 
 
+        request.session.user = user;
+
         return response.redirect('/dashboard'); 
+    }
+
+    destroy(request, response, next) {
+        request.session.destroy(() => {
+            response.clearCookie('root');
+            return response.redirect('/');
+        });
     }
 }
 
-export default new LoginController;
+export default new SessionController;

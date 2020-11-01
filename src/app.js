@@ -1,7 +1,10 @@
 require('dotenv').config();
 import express from 'express';
+import session from 'express-session';
+import flash from 'connect-flash';
 import routes from './routes';
 import path from 'path';
+const LokiStore = require('connect-loki')(session);
 
 class App {
   constructor() {
@@ -15,6 +18,17 @@ class App {
     this.server.use(express.json());
     
     this.server.use(express.urlencoded({ extended: false }));
+
+    this.server.use(flash());
+
+    this.server.use(session({
+      store: new LokiStore({
+        path: path.resolve(__dirname, '..', 'tmp', 'sessions.db')
+      }),
+      secret: process.env.SECRET,
+      resave: false,
+      saveUninitialized: true
+    }));
 
     this.server.use((error, request, response, next) => {
 

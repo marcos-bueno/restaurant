@@ -12,14 +12,14 @@
            <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="../admin/dist/img/avatar5.png" class="user-image" alt="User Image">
-              <span class="hidden-xs">Fulano Junior</span>
+              <span class="hidden-xs">Meu Perfil</span>
               </a>
               <ul class="dropdown-menu">
                  <li class="user-header">
                     <img src="../admin/dist/img/avatar5.png" class="img-circle" alt="User Image">
                     <p>
-                       Fulano Junior
-                       <small>fulano@restaurante.com.br</small>
+                       <%= user[0].name %>
+                       <small><%= user[0].email %></small>
                     </p>
                  </li>
                  <li class="user-footer">
@@ -27,7 +27,7 @@
                        <a href="#" class="btn btn-default btn-flat">Perfil</a>
                     </div>
                     <div class="pull-right">
-                       <a href="#" class="btn btn-default btn-flat">Sair</a>
+                       <a href="/dashboard/logout" class="btn btn-default btn-flat">Sair</a>
                     </div>
                  </li>
               </ul>

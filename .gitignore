@@ -4,3 +4,4 @@ thumbs.db
 .env
 node_modules/
 uploads/
+tmp/

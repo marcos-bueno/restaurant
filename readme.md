@@ -27,6 +27,7 @@ DB_HOST=??? // 127.0.0.1, localhost...
 DB_USER=??? // name of the user that is connected to the database.
 DB_PASS=??? // password of the user that is connected to the database.
 DB_NAME=??? // name of the database.
+SECRET=??? // secret to encrypt the session.
 ```
 
 ```sh
@@ -43,6 +44,9 @@ $ yarn dev
 | knex | [https://github.com/knex/knex][PlKnex] |
 | mysql | [https://github.com/mysqljs/mysql][PlMysql] |
 | bcryptjs | [https://github.com/dcodeIO/bcrypt.js][PlBcryptjs] |
+| express-session | [https://github.com/expressjs/session][PlSession] |
+| connect-loki | [https://github.com/Requarks/connect-loki][PlConnectLoki] |
+| connect-flash | [https://github.com/jaredhanson/connect-flash][PlConnectFlash] |
 | multer | [https://github.com/expressjs/multer][PlMulter] |
 | moment | [https://github.com/moment/moment][PlMoment] |
 | dotenv | [https://github.com/motdotla/dotenv][PlDotenv] |
@@ -54,6 +58,9 @@ $ yarn dev
    [PlKnex]: <https://github.com/knex/knex>
    [PlMysql]: <https://github.com/mysqljs/mysql>
    [PlBcryptjs]: <https://github.com/dcodeIO/bcrypt.js>
+   [PlSession]: <https://github.com/expressjs/session>
+   [PlConnectLoki]: <https://github.com/Requarks/connect-loki>
+   [PlConnectFlash]: <https://github.com/jaredhanson/connect-flash>
    [PlMulter]: <https://github.com/expressjs/multer>
    [PlMoment]: <https://github.com/moment/moment>
    [PlDotenv]: <https://github.com/motdotla/dotenv>
@@ -82,3 +89,5 @@ $ yarn dev
 [https://gist.github.com/justsml/2eabeace73b8d25569cca9e0e1cbe8e7](https://gist.github.com/justsml/2eabeace73b8d25569cca9e0e1cbe8e7)
 
 [https://medium.com/@jengopockets/encrypting-seeded-passwords-with-node-js-knex-and-bcrypt-e2efe56f745e](https://medium.com/@jengopockets/encrypting-seeded-passwords-with-node-js-knex-and-bcrypt-e2efe56f745e)
+
+[https://www.geeksforgeeks.org/how-to-display-flash-messages-using-connect-flash-module-in-node-js/](https://www.geeksforgeeks.org/how-to-display-flash-messages-using-connect-flash-module-in-node-js/)

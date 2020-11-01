@@ -47,6 +47,8 @@ class ReservationController {
         });
       }
 
+      request.flash('success', 'Reserva cadastrada com sucesso!');
+
       return response.redirect('/dashboard/reservas');
 
     } catch (error) {
@@ -87,6 +89,8 @@ class ReservationController {
       await knex('reservations')
       .where({ id })
       .del();
+
+      request.flash('success', 'Reserva deletada com sucesso!');
 
       return response.redirect('/dashboard/reservas');
 

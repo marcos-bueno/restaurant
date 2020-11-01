@@ -8,6 +8,10 @@ const routes = new Router();
 
 const upload = multer(uploadConfig);
 
+import authMiddleware from './middlewares/auth';
+
+import guestMiddleware from './middlewares/guest';
+
 import IndexController from './controllers/IndexController';
 
 import UserController from './controllers/UserController';
@@ -22,13 +26,24 @@ import DashContactsController from './controllers/DashContactsController';
 
 import DashMenuController from './controllers/DashMenuController';
 
-import LoginController from './controllers/LoginController';
+import SessionController from './controllers/SessionController';
+
+routes.use((request, response, next) => {
+  response.locals.flashSuccess = request.flash('success');
+  response.locals.flashError = request.flash('error');
+
+  return next();
+});
 
 routes.get('/', IndexController.index);
 
 routes.post('/', IndexController.create);
 
+routes.use('/dashboard', authMiddleware);
+
 routes.get('/dashboard', DashboardController.index);
+
+routes.get('/dashboard/logout', SessionController.destroy);
 
 routes.get('/dashboard/reservas', ReservationController.index);
 
@@ -62,8 +77,8 @@ routes.put('/dashboard/menu/:id', upload.single('photo'), DashMenuController.upd
 
 routes.delete('/dashboard/menu/:id', DashMenuController.delete);
 
-routes.get('/login', LoginController.index);
+routes.get('/login', guestMiddleware, SessionController.index);
 
-routes.post('/login', LoginController.store);
+routes.post('/login', SessionController.store);
 
 export default routes;

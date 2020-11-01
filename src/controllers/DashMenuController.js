@@ -39,7 +39,7 @@ class DashMenuController {
         });
       }
 
-      // return response.redirect('/dashboard/menu');
+      return response.redirect('/dashboard/menu');
 
     } catch (error) {
       
@@ -53,9 +53,6 @@ class DashMenuController {
     try {
 
       if (request.body.newPhoto === '') { 
-
-        console.log('IF');
-
         const { 
           id,
           title,
@@ -68,26 +65,9 @@ class DashMenuController {
         await knex('menus')
         .where({ id })
         .update({ photo, title, description, price });
-        
-      } else {
-
-        console.log('ELSE');
-
-        // const { 
-        //   id,
-        //   title,
-        //   description,
-        //   price
-        // } = request.body;
-
-        // const { filename: photo } = request.file;
-
-        // await knex('menus')
-        // .where({ id })
-        // .update({ photo, title, description, price });
       }
 
-      // return response.redirect('/dashboard/menu');
+      return response.redirect('/dashboard/menu');
 
     } catch (error) {
       
@@ -103,6 +83,8 @@ class DashMenuController {
       await knex('menus')
       .where({ id })
       .del();
+
+      request.flash('success', 'Item deletado com sucesso!');
 
       response.redirect("/dashboard/menu");
 

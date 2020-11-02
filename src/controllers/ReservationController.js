@@ -45,9 +45,13 @@ class ReservationController {
           date,
           time
         });
-      }
 
-      request.flash('success', 'Reserva cadastrada com sucesso!');
+        request.flash('success', 'Reserva cadastrada com sucesso!');
+        
+      } else {
+
+        request.flash('success', 'Reserva alterada com sucesso!');
+      }
 
       return response.redirect('/dashboard/reservas');
 

@@ -39,6 +39,8 @@ class DashMenuController {
         });
       }
 
+      request.flash('success', 'Item cadastrado com sucesso!');
+
       return response.redirect('/dashboard/menu');
 
     } catch (error) {

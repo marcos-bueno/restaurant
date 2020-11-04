@@ -383,7 +383,7 @@ h1, h2, h3, h4, h5, h6, figure {
   background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;
-  background: lightblue;
+  background:#dfdfdf;
   position: relative;
 }
 

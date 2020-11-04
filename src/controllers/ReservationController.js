@@ -29,31 +29,26 @@ class ReservationController {
   async create(request, response, next) {
 
     try {
-      if(request.body.id === undefined) {
-        const {
-          name,
-          email,
-          people,
-          date,
-          time,
-        } = request.body;
+      console.log("Create");
 
-        await knex('reservations').insert({
-          name,
-          email,
-          people,
-          date,
-          time
-        });
+      const {
+        name,
+        email,
+        people,
+        date,
+        time,
+      } = request.body;
 
-        request.flash('success', 'Reserva cadastrada com sucesso!');
-        
-      } else {
+      await knex('reservations').insert({
+        name,
+        email,
+        people,
+        date,
+        time
+      });
 
-        request.flash('success', 'Reserva alterada com sucesso!');
-      }
-
-      return response.redirect('/dashboard/reservas');
+      request.flash('success', 'Reserva cadastrada com sucesso!');
+      return response.redirect('');
 
     } catch (error) {
 
@@ -64,6 +59,7 @@ class ReservationController {
   async update(request, response, next) {
 
     try {
+      console.log("Update");
       const { 
         id,
         name,
@@ -77,7 +73,8 @@ class ReservationController {
       .where({ id })
       .update({ name, email, people, date, time });
 
-      return response.redirect('/dashboard/reservas');
+      request.flash('success', 'Reserva atualizada com sucesso!');
+      return response.redirect('');
 
     } catch (error) {
       
@@ -88,6 +85,7 @@ class ReservationController {
   async delete(request, response, next) {
 
     try {
+      console.log("Delete");
       const { id } = request.params;
       
       await knex('reservations')

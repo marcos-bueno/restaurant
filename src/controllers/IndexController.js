@@ -5,10 +5,13 @@ class IndexController {
     
     try {
       const data = await knex('menus');
+      const dataMenu = await knex('menus').count('id');
 
       response.render('pages/index', {
         data,
-        body: request.body
+        body: request.body,
+
+        countMenu: dataMenu[0]['count(`id`)']
       });
 
     } catch (error) {

@@ -172,8 +172,7 @@
 
          photoInputUpdate.onchange = function(e) {
             imgUpdate.classList.add('preview');
-            imgUpdate.src = URL.createObjectURL(e.target.files[0]);
-            photoInputUpdate.name = '123';
+            imgUpdate.src = URL.createObjectURL(event.target.files[0]);
          };
 
          /* Create */
@@ -196,21 +195,18 @@
                object[key] = value
             });
 
-            if(request.body.id === undefined) {
-               await fetch(`/dashboard/menu`, {
-                  method: 'POST',
-                  headers: { 
-                     'Content-Type': 'application/json' 
-                  },
-                  body: JSON.stringify({
-                     photo: photo[3],
-                     newPhoto: object.photo.name,
-                     title: object.title,
-                     description: object.description,
-                     price: object.price
-                  }),
-               });
-            }
+            await fetch(`/dashboard/menu`, {
+               method: 'POST',
+               headers: { 
+                  'Content-Type': 'application/json' 
+               },
+               body: JSON.stringify({
+                  photo: photo[3],
+                  title: object.title,
+                  description: object.description,
+                  price: object.price
+               }),
+            });
          });
 
          /* Update */
@@ -220,7 +216,7 @@
          [...document.querySelectorAll('.btn-update')].forEach(btn => {
 
             btn.addEventListener('click', async event => {
-
+               event.preventDefault();
                var path = event.path || (event.composedPath && event.composedPath());
          
                let tr = path.find(element => {
@@ -256,14 +252,13 @@
                $('#modal-update').modal('show');
             });
          });
-
          const updateBtn = document.querySelector("#updateBtn");
 
          updateBtn.addEventListener('click', async event => {
-
+            event.preventDefault();
             const inputImg = formUpdate.querySelector('img').src;
 
-            const photo = inputImg.split("/");
+            const photo = inputImg.split("/"); console.log(photo);
 
             const formData = new FormData(formUpdate);
 
@@ -281,7 +276,6 @@
                body: JSON.stringify({
                   id: object.id,
                   photo: photo[3],
-                  newPhoto: object.photo.name,
                   title: object.title,
                   description: object.description,
                   price: object.price

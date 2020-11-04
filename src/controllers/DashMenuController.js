@@ -19,29 +19,25 @@ class DashMenuController {
   }
 
   async create(request, response, next) {
+    try{
+      console.log("Create");
+      const { filename: photo } = request.file;
 
-    try {
-      if(request.body.id === undefined) {
+      const{
+        title,
+        description,
+        price
+      } = request.body;
 
-        const { filename: photo } = request.file;
+      await knex('menus').insert({
+        title,
+        description,
+        price,
+        photo
+      });
 
-        const { 
-          title, 
-          description, 
-          price
-        } = request.body;
-    
-        await knex('menus').insert({
-          photo,
-          title,
-          description, 
-          price
-        });
-      }
-
-      request.flash('success', 'Item cadastrado com sucesso!');
-
-      return response.redirect('/dashboard/menu');
+      request.flash('success', 'Prato cadastrado com sucesso!');
+      //response.redirect("/dashboard/menus");
 
     } catch (error) {
       
@@ -51,25 +47,25 @@ class DashMenuController {
 
 
   async update(request, response, next) {
+    try{
+      console.log("Update");
 
-    try {
+      const{
+        id,
+        title,
+        description,
+        filename: photo = request.file,
+        price
+      } = request.body;
+      console.log("Update2");
 
-      if (request.body.newPhoto === '') { 
-        const { 
-          id,
-          title,
-          description,
-          price
-        } = request.body;
+      await knex('menus')
+      .where({ id })
+      .update({ title, description, price, photo });
+      console.log("Update3");
 
-        const { photo } = request.file
-
-        await knex('menus')
-        .where({ id })
-        .update({ photo, title, description, price });
-      }
-
-      return response.redirect('/dashboard/menu');
+      request.flash('success', 'Prato atualizado com sucesso!');
+      response.redirect("/dashboard/menus");
 
     } catch (error) {
       
@@ -80,6 +76,7 @@ class DashMenuController {
   async delete(request, response, next) {
 
     try {
+      console.log("Delete");
       const { id } = request.params;
 
       await knex('menus')

@@ -26,7 +26,8 @@ class DashContactsController {
       .where({ id })
       .del();
 
-      response.redirect("/dashboard/contatos");
+      request.flash('success', 'Contato deletado com sucesso!');
+      return response.redirect('');
 
     } catch (error) {
       

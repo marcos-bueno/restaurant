@@ -65,6 +65,13 @@ class ReservationController {
         date,
         time,
       } = request.body;
+      console.log(name);
+
+      if(!name)
+      {
+        console.log("IF");
+        return confirm("mensagem");
+      }
 
       await knex('reservations')
       .where({ id })

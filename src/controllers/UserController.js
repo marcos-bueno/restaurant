@@ -25,7 +25,7 @@ class UserController {
   async create(request, response, next) {
     
     try {
-
+      console.log("Create");
       const {
         name,
         email,
@@ -42,6 +42,7 @@ class UserController {
         });
       }
 
+      request.flash('success', 'Usuário cadastrado com sucesso!');
       return response.redirect('/dashboard/usuarios');
 
     } catch (error) {
@@ -53,6 +54,7 @@ class UserController {
   async update(request, response, next) {
 
     try {
+      console.log("Update");
       const {
         id,
         newPassword, 
@@ -85,6 +87,7 @@ class UserController {
   async delete(request, response, next) {
 
     try {
+      console.log("Delete");
       const { id } = request.params;
 
       await knex('users')

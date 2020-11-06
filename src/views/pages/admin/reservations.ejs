@@ -123,6 +123,7 @@
                         <span aria-hidden="true">&times;</span>
                         </button>
                         <h4 class="modal-title">Editar Reserva</h4>
+                        <%- include('../../partials/flash') %>
                      </div>
                      <div class="modal-body">
                         <div class="form-group">
@@ -187,6 +188,7 @@
             formCreateData.forEach((value, key) => {
                object[key] = value
             });
+
             if(request.body.id === undefined) {
                await fetch(`/dashboard/reservas`, {
                   method: 'POST',

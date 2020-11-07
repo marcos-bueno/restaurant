@@ -69,7 +69,7 @@ class ReservationController {
       } = request.body;
 
       if (!name) {
-        return alert("O campo nome está vazio!");
+        throw new Error("O campo nome está vazio!");
       }
 
       await knex('reservations')
@@ -80,8 +80,8 @@ class ReservationController {
       return response.redirect('');
 
     } catch (error) {
-      
-      next(error);
+
+      alert(error);
     }
   }
 

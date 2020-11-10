@@ -66,6 +66,11 @@ class ReservationController {
         time,
       } = request.body;
 
+      if(!name || !email || !people || !date || !time)
+      {
+        return alert(error);
+      }
+
       await knex('reservations')
       .where({ id })
       .update({ name, email, people, date, time });
@@ -75,7 +80,7 @@ class ReservationController {
 
     } catch (error) {
 
-      alert(error);
+      next(error);
     }
   }
 

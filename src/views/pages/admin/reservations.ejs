@@ -270,8 +270,9 @@
                })
             })
             .then(response => {
-               if (!object.name) {
-                  throw new Error('O campo nome está vazio!');
+               if(!object.name || !object.email || !object.people || !object.date || !object.time) {
+                  throw new Error('Você deve preencher todos os campos');
+                  return;
                }
                window.location.reload();
             })

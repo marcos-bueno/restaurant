@@ -1,7 +1,5 @@
 import moment from 'moment';
 
-import alert from 'alert'
-
 import knex from '../database';
 
 moment.locale("pt-BR");
@@ -67,10 +65,6 @@ class ReservationController {
         date,
         time,
       } = request.body;
-
-      if (!name) {
-        throw new Error("O campo nome está vazio!");
-      }
 
       await knex('reservations')
       .where({ id })

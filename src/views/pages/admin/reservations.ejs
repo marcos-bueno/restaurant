@@ -268,9 +268,17 @@
                   people: object.people,
                   date: object.date,
                   time: object.time,
-               }),
+               })
+            })
+            .then(response => {
+               if (!object.name) {
+                  throw new Error('O campo nome está vazio!');
+               }
+               window.location.reload();
+            })
+            .catch(error => {
+               alert(error.message);
             });
-            window.location.reload();
          });
 
          /* Delete */

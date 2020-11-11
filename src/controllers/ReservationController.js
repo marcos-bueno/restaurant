@@ -66,9 +66,8 @@ class ReservationController {
         time,
       } = request.body;
 
-      if(!name || !email || !people || !date || !time)
-      {
-        return alert(error);
+      if (!name || !email || !people || !date || !time) {
+        return response.json();
       }
 
       await knex('reservations')

@@ -271,8 +271,7 @@
             })
             .then(response => {
                if(!object.name || !object.email || !object.people || !object.date || !object.time) {
-                  throw new Error('Você deve preencher todos os campos');
-                  return;
+                  throw new Error('Você deve preencher todos os campos!');
                }
                window.location.reload();
             })

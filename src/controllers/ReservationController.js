@@ -17,7 +17,7 @@ class ReservationController {
         id,
         data,
         moment,
-        body: request.body
+        // body: request.body
       });
 
     } catch (error) {
@@ -36,6 +36,10 @@ class ReservationController {
         date,
         time,
       } = request.body;
+
+      if (!name || !email || !people || !date || !time) {
+        return response.json();
+      }
 
       await knex('reservations').insert({
         name,

@@ -298,7 +298,7 @@
 
                let data = JSON.parse(tr.dataset.row);
 
-               if (confirm(`Deseja realmente excluir o item ${data.title}?`)) {
+               if (confirm(`Deseja realmente excluir o menu ${data.title}?`)) {
 
                   await fetch(`/dashboard/menu/${data.id}`, {
                      method: 'DELETE'

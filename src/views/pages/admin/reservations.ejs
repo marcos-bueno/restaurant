@@ -15,6 +15,7 @@
          </aside>
          <!-- Content Wrapper -->
          <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
             <section class="content-header">
                <h1>
                   Reservas
@@ -24,6 +25,7 @@
                   <li class="active">Reservas</li>
                </ol>
             </section>
+            <!-- Main content -->
             <section class="content container-fluid">
                <%- include('../../partials/flash') %>
                <div class="box">
@@ -187,7 +189,7 @@
             const object = {};
 
             formCreateData.forEach((value, key) => {
-               object[key] = value
+               object[key] = value;
             });
 
             await fetch(`/dashboard/reservas`, {

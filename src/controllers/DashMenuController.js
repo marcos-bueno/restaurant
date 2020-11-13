@@ -19,25 +19,30 @@ class DashMenuController {
   }
 
   async create(request, response, next) {
-    try{
-      console.log("Create");
+
+    try {
       const { filename: photo } = request.file;
 
-      const{
+      const {
         title,
         description,
         price
       } = request.body;
 
+      if (!title || !description || !price) {
+        return response.json();
+      }
+
       await knex('menus').insert({
+        photo,
         title,
         description,
-        price,
-        photo
+        price
       });
 
-      request.flash('success', 'Prato cadastrado com sucesso!');
-      //response.redirect("/dashboard/menus");
+      request.flash('success', 'Menu cadastrado com sucesso!');
+
+      return response.redirect('');
 
     } catch (error) {
       
@@ -45,27 +50,50 @@ class DashMenuController {
     }
   }
 
-
   async update(request, response, next) {
-    try{
-      console.log("Update");
+    
+    try {
+      if (!request.file) {
 
-      const{
-        id,
-        title,
-        description,
-        filename: photo = request.file,
-        price
-      } = request.body;
-      console.log("Update2");
+        const {
+          id,
+          photo,
+          title,
+          description,
+          price
+        } = request.body;
 
-      await knex('menus')
-      .where({ id })
-      .update({ title, description, price, photo });
-      console.log("Update3");
+        if (!title || !description || !price) {
+          return response.json();
+        }
 
-      request.flash('success', 'Prato atualizado com sucesso!');
-      response.redirect("/dashboard/menus");
+        await knex('menus')
+        .where({ id })
+        .update({ photo, title, description, price });
+
+      } else {
+
+        const { filename: photo } = request.file;
+
+        const {
+          id,
+          title,
+          description,
+          price
+        } = request.body;
+
+        if (!title || !description || !price) {
+          return response.json();
+        }
+
+        await knex('menus')
+        .where({ id })
+        .update({ photo, title, description, price });
+      }
+
+      request.flash('success', 'Menu atualizado com sucesso!');
+
+      return response.redirect('');
 
     } catch (error) {
       
@@ -76,16 +104,15 @@ class DashMenuController {
   async delete(request, response, next) {
 
     try {
-      console.log("Delete");
       const { id } = request.params;
 
       await knex('menus')
       .where({ id })
       .del();
 
-      request.flash('success', 'Item deletado com sucesso!');
+      request.flash('success', 'Menu deletado com sucesso!');
 
-      response.redirect("/dashboard/menu");
+      return response.redirect('');
 
     } catch (error) {
       

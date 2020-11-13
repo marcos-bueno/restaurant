@@ -25,25 +25,26 @@ class UserController {
   async create(request, response, next) {
     
     try {
-      console.log("Create");
       const {
         name,
         email,
         password } = request.body;
 
-      if(request.body.id === undefined) {
+      const hash = bcrypt.hashSync(password, 10);
 
-        const hash = bcrypt.hashSync(password, 14);
-
-        await knex('users').insert({
-          name,
-          email,
-          password: hash
-        });
+      if (!name || !email || !password) {
+        return response.json();
       }
 
+      await knex('users').insert({
+        name,
+        email,
+        password: hash
+      });
+
       request.flash('success', 'Usuário cadastrado com sucesso!');
-      return response.redirect('/dashboard/usuarios');
+
+      return response.redirect('');
 
     } catch (error) {
         
@@ -54,29 +55,54 @@ class UserController {
   async update(request, response, next) {
 
     try {
-      console.log("Update");
-      const {
-        id,
-        newPassword, 
-        passwordConfirm
-      } = request.body;
+      if (request.body.name) {
 
-      if (newPassword === passwordConfirm) {
+        const {
+          id,
+          name, 
+          email
+        } = request.body;
 
-        const hash = bcrypt.hashSync(newPassword, 14);
+        if (!name || !email) {
+          return response.json();
+        }
+
+        await knex('users')
+        .where({ id })
+        .update({
+          name,
+          email
+        });
+        
+      } else {
+
+        const {
+          id,
+          newPassword, 
+          passwordConfirm
+        } = request.body;
+  
+        if (!newPassword || !passwordConfirm) {
+
+          return response.json();
+
+        } else if (newPassword !== passwordConfirm) {
+
+          return response.json();
+        }
+
+        const hash = bcrypt.hashSync(newPassword, 10);
 
         await knex('users')
         .where({ id })
         .update({
           password: hash
         });
-  
-        return response.redirect('/dashboard/usuarios');
-
-      } else {
-
-        console.log('Value of "newPassword" and "passwordConfirm" differents');
       }
+
+      request.flash('success', 'Usuário atualizado com sucesso!');
+
+      return response.redirect('');
 
     } catch (error) {
       
@@ -87,14 +113,15 @@ class UserController {
   async delete(request, response, next) {
 
     try {
-      console.log("Delete");
       const { id } = request.params;
 
       await knex('users')
       .where({ id })
       .del();
 
-      return response.redirect('/dashboard/usuarios');
+      request.flash('success', 'Usuário deletado com sucesso!');
+
+      return response.redirect('');
 
     } catch (error) {
       

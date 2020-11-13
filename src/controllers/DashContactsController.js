@@ -1,6 +1,7 @@
 import knex from '../database';
 
 class DashContactsController {
+  
   async index(request, response, next) {
     
     try {
@@ -26,7 +27,8 @@ class DashContactsController {
       .where({ id })
       .del();
 
-      request.flash('success', 'Contato deletado com sucesso!');
+      request.flash('success', 'Mensagem deletada com sucesso!');
+
       return response.redirect('');
 
     } catch (error) {

@@ -1,10 +1,11 @@
 import knex from '../database';
 
 class ContactController {
+
   index(request, response, next) {
     
     try {
-      response.render('pages/contact');
+      return response.render('pages/contact');
 
     } catch (error) {
       
@@ -26,8 +27,10 @@ class ContactController {
         email,
         message
       });
+
+      request.flash('success', 'Mensagem enviada com sucesso!');
   
-      return response.redirect('/');
+      return response.redirect('/contato');
 
     } catch (error) {
       

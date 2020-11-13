@@ -72,7 +72,7 @@
          <div class="modal fade" id="modal-create">
             <div class="modal-dialog">
                <div class="modal-content" style="border-top: 3px solid #00a65a;">
-                  <form method="post" enctype="multipart/form-data">
+                  <form method="POST" enctype="multipart/form-data">
                      <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -95,7 +95,7 @@
                         <div class="form-group">
                            <label for="imputPhotoCreate">Foto</label>
                            <img style="max-width: 128px; max-height: 128px; display: block;" src="../admin/dist/img/no-image.png">
-                           <input type="file" class="form-control" id="inputPhotoCreate" name="photo">
+                           <input type="file" class="form-control" id="inputPhotoCreate" name="photo" required>
                         </div>
                      </div>
                      <div class="modal-footer">
@@ -111,7 +111,7 @@
          <div class="modal fade" id="modal-update">
             <div class="modal-dialog">
                <div class="modal-content" style="border-top: 3px solid #00c0ef;">
-                  <form method="post" enctype="multipart/form-data">
+                  <form method="PUT" enctype="multipart/form-data">
                      <input type="hidden" name="id">
                      <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -183,29 +183,28 @@
 
          createBtn.addEventListener('click', async event => {
 
-            const inputImg = formUpdate.querySelector('img').src;
-
-            const photo = inputImg.split("/");
+            event.preventDefault();
 
             const formCreateData = new FormData(formCreate);
 
             const object = {};
 
             formCreateData.forEach((value, key) => {
-               object[key] = value
+               object[key] = value;
             });
 
             await fetch(`/dashboard/menu`, {
                method: 'POST',
-               headers: { 
-                  'Content-Type': 'application/json' 
-               },
-               body: JSON.stringify({
-                  photo: photo[3],
-                  title: object.title,
-                  description: object.description,
-                  price: object.price
-               }),
+               body: formCreateData
+            })
+            .then(response => {
+               if(!object.title || !object.description || !object.price) {
+                  throw new Error('Você deve preencher todos os campos!');
+               }
+               window.location.reload();
+            })
+            .catch(error => {
+               alert(error.message);
             });
          });
 
@@ -216,7 +215,9 @@
          [...document.querySelectorAll('.btn-update')].forEach(btn => {
 
             btn.addEventListener('click', async event => {
+
                event.preventDefault();
+
                var path = event.path || (event.composedPath && event.composedPath());
          
                let tr = path.find(element => {
@@ -230,14 +231,10 @@
 
                   let input = formUpdate.querySelector(`[name=${name}]`);
 
-                  // console.log('input', input);
-
                   switch (name) {
 
                      case 'photo':
                         formUpdate.querySelector('img').src = '/' + data[name];
-
-                        // console.log('data[name]', data[name]);
                         break;
 
                      case 'price':
@@ -252,13 +249,16 @@
                $('#modal-update').modal('show');
             });
          });
+
          const updateBtn = document.querySelector("#updateBtn");
 
          updateBtn.addEventListener('click', async event => {
+
             event.preventDefault();
+
             const inputImg = formUpdate.querySelector('img').src;
 
-            const photo = inputImg.split("/"); console.log(photo);
+            const photo = inputImg.split("/");
 
             const formData = new FormData(formUpdate);
 
@@ -270,18 +270,17 @@
 
             await fetch(`/dashboard/menu/${object.id}`, {
                method: 'PUT',
-               headers: { 
-                  'Content-Type': 'application/json' 
-               },
-               body: JSON.stringify({
-                  id: object.id,
-                  photo: photo[3],
-                  title: object.title,
-                  description: object.description,
-                  price: object.price
-               }),
+               body: formData
+            })
+            .then(response => {
+               if(!object.title || !object.description || !object.price) {
+                  throw new Error('Você deve preencher todos os campos!');
+               }
+               window.location.reload();
+            })
+            .catch(error => {
+               alert(error.message);
             });
-            window.location.reload();
          });
       
          /* Delete */

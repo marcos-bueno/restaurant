@@ -21,7 +21,7 @@
                   Usuários
                </h1>
                <ol class="breadcrumb">
-                  <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+                  <li><a href="/dashboard"><i class="fa fa-home"></i> Início</a></li>
                   <li class="active">Usuários</li>
                </ol>
             </section>
@@ -179,6 +179,8 @@
 
          createBtn.addEventListener('click', async event => {
 
+            event.preventDefault();
+
             const formCreateData = new FormData(formCreate);
 
             const object = {};
@@ -186,20 +188,27 @@
             formCreateData.forEach((value, key) => {
                object[key] = value
             });
-            if(request.body.id === undefined) {
-               await fetch(`/dashboard/usuarios`, {
-                  method: 'POST',
-                  headers: { 
-                     'Content-Type': 'application/json' 
-                  },
-                  body: JSON.stringify({
-                     name: object.name,
-                     email: object.email,
-                     password: object.password
-                  }),
-               });
+
+            await fetch(`/dashboard/usuarios`, {
+               method: 'POST',
+               headers: { 
+                  'Content-Type': 'application/json' 
+               },
+               body: JSON.stringify({
+                  name: object.name,
+                  email: object.email,
+                  password: object.password
+               })
+            })
+            .then(response => {
+               if(!object.name || !object.email || !object.password) {
+                  throw new Error('Você deve preencher todos os campos!');
+               }
                window.location.reload();
-            }
+            })
+            .catch(error => {
+               alert(error.message);
+            });
          });
 
          /* Update name and email */
@@ -248,14 +257,23 @@
 
             await fetch(`/dashboard/usuarios/${object.id}`, {
                method: 'PUT',
-               headers: { 
+               headers: {
                   'Content-Type': 'application/json' 
                },
                body: JSON.stringify({
                   id: object.id,
                   name: object.name,
                   email: object.email
-               }),
+               })
+            })
+            .then(response => {
+               if(!object.name || !object.email) {
+                  throw new Error('Você deve preencher todos os campos!');
+               }
+               window.location.reload();
+            })
+            .catch(error => {
+               alert(error.message);
             });
          });
 
@@ -312,9 +330,23 @@
                   id: object.id,
                   newPassword: object.newPassword,
                   passwordConfirm: object.passwordConfirm
-               }),
+               })
+            })
+            .then(response => {
+               if(!object.newPassword || !object.passwordConfirm) {
+
+                  throw new Error('Você deve preencher todos os campos!');
+
+               } else if (object.newPassword !== object.passwordConfirm) {
+
+                  throw new Error('Senha não confirma!');
+
+               }
+               window.location.reload();
+            })
+            .catch(error => {
+               alert(error.message);
             });
-            window.location.reload();
          });
 
          /* Delete */
@@ -322,6 +354,8 @@
          [...document.querySelectorAll('.btn-delete')].forEach(btn => {
 
             btn.addEventListener('click', async event => {
+
+               event.preventDefault();
 
                let tr = event.path.find(element => {
 

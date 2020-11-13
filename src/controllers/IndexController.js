@@ -7,10 +7,9 @@ class IndexController {
       const data = await knex('menus');
       const dataMenu = await knex('menus').count('id');
 
-      response.render('pages/index', {
+      return response.render('pages/index', {
         data,
         body: request.body,
-
         countMenu: dataMenu[0]['count(`id`)']
       });
 
@@ -42,6 +41,8 @@ class IndexController {
         time,
       });
   
+      request.flash('success', 'Reserva cadastrada com sucesso!');
+
       return response.redirect('/');
 
     } catch (error) {

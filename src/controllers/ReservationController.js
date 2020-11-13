@@ -17,7 +17,7 @@ class ReservationController {
         id,
         data,
         moment,
-        // body: request.body
+        body: request.body
       });
 
     } catch (error) {
@@ -50,7 +50,8 @@ class ReservationController {
       });
 
       request.flash('success', 'Reserva cadastrada com sucesso!');
-      return response.redirect('/dashboard/reservas');
+
+      return response.redirect('');
 
     } catch (error) {
 
@@ -79,6 +80,7 @@ class ReservationController {
       .update({ name, email, people, date, time });
 
       request.flash('success', 'Reserva atualizada com sucesso!');
+
       return response.redirect('');
 
     } catch (error) {
@@ -97,6 +99,7 @@ class ReservationController {
       .del();
 
       request.flash('success', 'Reserva deletada com sucesso!');
+
       return response.redirect('');
 
     } catch (error) {

@@ -35,6 +35,12 @@ $ yarn knex migrate:latest
 $ yarn dev
 ```
 
+##### Default user:
+```sh
+email: admin@restaurante.com
+password: admin
+```
+
 ## Packages:
 
 | Package | GitHub |

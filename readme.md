@@ -12,8 +12,8 @@
 Open your favorite Terminal and run these commands:
 
 ```sh
-$ git clone git@github.com:marcos-bueno/restaurant.git
-$ cd restaurant
+$ git clone git@github.com:BrunoGurris/restaurante.git
+$ cd restaurante
 $ yarn
 $ code .
 ```

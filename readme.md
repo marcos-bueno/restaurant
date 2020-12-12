@@ -9,7 +9,7 @@
   - Install [Node.js](https://nodejs.org/) (recommended version for most users).
   - Install [Docker](https://www.docker.com/products/docker-desktop) and [pull image](https://hub.docker.com/_/mysql)
 
-Open your favorite Terminal and run these commands1:
+Open your favorite Terminal and run these commands:
 
 ```sh
 $ git clone git@github.com:marcos-bueno/restaurant.git
